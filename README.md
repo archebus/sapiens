@@ -85,13 +85,13 @@ different clocks here. Lookup relaxation networks...
 ## SPRINTS / TODO.
 
 ### Sprint 0: env / workflow
-- [ ] C workflow / env. GCC clang make gdb valgrind.
-- [ ] Makefile with debug and release targets.
-- [ ] K&R chapters on points and structs
-- [ ] Implement dynamic array ds. Push, get, free.
+- [x] C workflow / env. GCC clang make gdb valgrind.
+- [x] K&R chapters on points and structs
+- [x] Implement dynamic array ds. Push, get, free.
 - [ ] Get a handle on realloc, key for perf.
-- [ ] Implement simple has map from scratch.
-- [ ] Test harness (assert macros)
+- [ ] Implement simple hash map from scratch.
+- [x] Test harness (assert macros)
+- [ ] Makefile with debug and release targets.
 
 **Milestone**: Dyanmic array and hash maps passing tests under valgrind. No leaks.
 
