@@ -61,7 +61,7 @@ CONSEQUENCE / REINFORCEMENT
 
 ### Some design decisions (thinking dump)
 * Verb / target seperation --> e.g. direction context is implicit in a verb.
-Free implies direction. Instead verb run is attached to context. Decision tree
+Flee implies direction. Instead verb run is attached to context. Decision tree
 would decide run - [safety] with safety being a known concept.
 
 * Interrupt thresholds: Every commited behavior has a start threshold and
