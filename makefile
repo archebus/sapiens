@@ -42,13 +42,19 @@ all: build
 build: $(TARGET)
 
 bear: clean
-	bear -- make build
+	@echo "Generating compilation targets for clang ..."
+	@bear -- make build
+	@echo "Done"
 
 run: build
+	@echo "Building project ..."
 	@./$(TARGET)
+	@echo "Done"
 
 test: $(TEST_TARGET)
-	./$(TEST_TARGET)
+	@echo "Running Tests ..."
+	@./$(TEST_TARGET)
+	@echo "Done"
 
 clean:
 	@echo "Cleaning Project"
@@ -59,20 +65,20 @@ clean:
 # Link application
 $(TARGET): $(OBJ)
 	@mkdir -p $(BIN_DIR)
-	$(CC) $^ -o $@ $(LDFLAGS)
+	@$(CC) $^ -o $@ $(LDFLAGS)
 
 
 # Link tests
 $(TEST_TARGET): $(LIB_OBJ) $(TEST_OBJ)
 	@mkdir -p $(BIN_DIR)
-	$(CC) $^ -o $@ $(LDFLAGS)
+	@$(CC) $^ -o $@ $(LDFLAGS)
 
 # Compile App
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Compile Tests
 $(OBJ_DIR)/test_%.o: $(TEST_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
