@@ -6,6 +6,82 @@ and a genetic layer. Built from first principles in C.
 
 ---
 
+## ARCHITECTURE:
+
+**General**:
+Write everything myself unless there is a clear reason not to.
+External dependencies at an absolute minimum.
+
+Profile before optimising. Measure, don't guess.
+
+Document unusual decisions in comments. Not what the code does -> why.
+
+Keep the world small until Sprint 7 is stable. Complexity should grow
+from working systems, not assumptions.
+
+**The Brain**:
+Agent brain composed of layered systems.
+Data flows DOWNWARDS each tick. The consequence layer feeds back UPWARDS
+via Hebbian weight updates. Genome wraps everything as background monitor.
+
+```
+GENOME (modulates thresholds and sensitivities throughout)
+|
+PERCEPTION
+  sight / proximity / body state / known locations
+|
+CONCEPT / MEMORY
+  agent tags (mean, nice, danger)
+  place memory (food patch, shelter, home)
+  object concepts (food decays, tools)
+  hebbian weights (co-activation bias)
+|
+DRIVE / BIOCHEMISTRY
+  hunger / fear / social / novelty
+  drives create pressure on the decision layer
+  chemical decay and cascade dynamics
+|
+DECISION
+  priority queue (weighted drive ranking)
+  draw LUT (safety > food > social > novelty)
+  commitment + interrupt (two thresholds per behaviour)
+|
+ACTION
+  verb (pure: run, eat, ask, hide, trade)
+  target (reference into place/agent memory)
+  pathfinding (toward target)
+|
+CONSEQUENCE / REINFORCEMENT
+  outcome signal (positive / negative)
+  hebbian write-back to concept weights
+  fitness pressure into genome over generations
+|
+(feedback loop back to CONCEPT layer)
+```
+
+### Some design decisions (thinking dump)
+* Verb / target seperation --> e.g. direction context is implicit in a verb.
+Free implies direction. Instead verb run is attached to context. Decision tree
+would decide run - [safety] with safety being a known concept.
+
+* Interrupt thresholds: Every commited behavior has a start threshold and
+a higher override threshold. The gap between them is behavioural intertia.
+Genomes decide this gap width.
+
+* Hebbian weights are memory: Past experiences live implicit in connection weights,
+not as a memory bank. Network is biased by history, recognition vs category ...
+learning are distinct problems --> start with category first. (stranger = risk)
+
+* Drive heirachy emergence: safety / shelter / food / social priority is not
+hardcoded in the queue logic. It emerges from drive weights. A LUT will resolve
+genuine draws in priority based on hardcoded maslow heirachy.
+
+* Time: slow time --> world ticks. Pawn movement. Fast time --> neuron layer.
+Brains updates and settles WITHIN the world tick (multiple passes). So 
+different clocks here. Lookup relaxation networks...
+
+---
+
 ## SPRINTS / TODO.
 
 ### Sprint 0: env / workflow
@@ -100,82 +176,6 @@ then wandering again. Purely driven by brain state.
 - [ ] Tech advancement
 - [ ] Breeding
 - [ ] Tribal dynamics / group formation
-
----
-
-## ARCHITECTURE:
-
-**General**:
-Write everything myself unless there is a clear reason not to.
-External dependencies at an absolute minimum.
-
-Profile before optimising. Measure, don't guess.
-
-Document unusual decisions in comments. Not what the code does -> why.
-
-Keep the world small until Sprint 7 is stable. Complexity should grow
-from working systems, not assumptions.
-
-**The Brain**:
-Agent brain composed of layered systems.
-Data flows DOWNWARDS each tick. The consequence layer feeds back UPWARDS
-via Hebbian weight updates. Genome wraps everything as background monitor.
-
-```
-GENOME (modulates thresholds and sensitivities throughout)
-|
-PERCEPTION
-  sight / proximity / body state / known locations
-|
-CONCEPT / MEMORY
-  agent tags (mean, nice, danger)
-  place memory (food patch, shelter, home)
-  object concepts (food decays, tools)
-  hebbian weights (co-activation bias)
-|
-DRIVE / BIOCHEMISTRY
-  hunger / fear / social / novelty
-  drives create pressure on the decision layer
-  chemical decay and cascade dynamics
-|
-DECISION
-  priority queue (weighted drive ranking)
-  draw LUT (safety > food > social > novelty)
-  commitment + interrupt (two thresholds per behaviour)
-|
-ACTION
-  verb (pure: run, eat, ask, hide, trade)
-  target (reference into place/agent memory)
-  pathfinding (toward target)
-|
-CONSEQUENCE / REINFORCEMENT
-  outcome signal (positive / negative)
-  hebbian write-back to concept weights
-  fitness pressure into genome over generations
-|
-(feedback loop back to CONCEPT layer)
-```
-
-### Some design decisions (thinking dump)
-* Verb / target seperation --> e.g. direction context is implicit in a verb.
-Free implies direction. Instead verb run is attached to context. Decision tree
-would decide run - [safety] with safety being a known concept.
-
-* Interrupt thresholds: Every commited behavior has a start threshold and
-a higher override threshold. The gap between them is behavioural intertia.
-Genomes decide this gap width.
-
-* Hebbian weights are memory: Past experiences live implicit in connection weights,
-not as a memory bank. Network is biased by history, recognition vs category ...
-learning are distinct problems --> start with category first. (stranger = risk)
-
-* Drive heirachy emergence: safety / shelter / food / social priority is not
-hardcoded in the queue logic. It emerges from drive weights. A LUT will resolve
-genuine draws in priority based on hardcoded maslow heirachy.
-
-* Time: slow time --> world ticks. Pawn movement. Fast time --> neuron layer.
-Brains updates and settles WITHIN the world tick (multiple passes). So 
-different clocks here. Lookup relaxation networks...
 
 ---
 
