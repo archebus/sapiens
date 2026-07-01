@@ -91,7 +91,7 @@ different clocks here. Lookup relaxation networks...
 - [ ] Get a handle on realloc, key for perf.
 - [ ] Implement simple hash map from scratch.
 - [x] Test harness (assert macros)
-- [ ] Makefile with debug and release targets.
+- [x] Makefile with build, clean, test targets.
 
 **Milestone**: Dyanmic array and hash maps passing tests under valgrind. No leaks.
 
