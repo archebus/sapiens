@@ -30,7 +30,7 @@ int main()
                 );
     }
 
-    // Push pass with rand()
+    // Push with rand() for variance.
     for (size_t i = 0; i < neuron_count; i++) {
         float push = rand() % (rand_max + 1);
         stimulate(&neurons[i], push);

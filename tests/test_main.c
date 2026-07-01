@@ -1,4 +1,5 @@
 #include "test_d_array.h"
+#include "test_neuron.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -18,6 +19,8 @@ int main(void) {
         {"d_array push single", test_dArray_push_single},
         {"d_array push realloc", test_dArray_push_realloc},
         {"d_array get", test_dArray_get},
+        {"neuron init", test_neuron_init},
+        {"neuron stim", test_neuron_stimulate_pos} 
     };
 
     // Get the size of the array..
