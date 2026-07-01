@@ -96,14 +96,14 @@ different clocks here. Lookup relaxation networks...
 **Milestone**: Dyanmic array and hash maps passing tests under valgrind. No leaks.
 
 ### Sprint 1: neuron
-- [ ] neuron struct (activation / decay / fire)
-- [ ] update function for applied decay
-- [ ] stimulate function to add input single, clamped
-- [ ] fired predicate, return 1 on threshold
-- [ ] ascii render -> single character showing activation level?
+- [x] neuron struct (activation / decay / fire)
+- [x] update function for applied decay
+- [x] stimulate function to add input single, clamped
+- [x] fired predicate, return 1 on threshold
+- [x] ascii render -> single character showing activation level?
 - [ ] tests: simulate, decay, fire, decay, back below thresholds.
 
-**Milestone**: Neuron I can poke from main..
+**Milestone**: Neuron I can poke from main.. [DONE!]
 
 ### Sprint 2: lobe
 - [ ] lobe struct, neurons in flat array.
