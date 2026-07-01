@@ -24,7 +24,8 @@ CFLAGS := \
 LDFLAGS :=
 
 # Source Files
-SRC := $(wildcard $(SRC_DIR)/*.c)
+rwildcard = $(foreach d,$(wildcard $(1)*),$(call rwildcard,$(d)/,$(2)) $(filter $(subst *,%,$(2)),$(d)))
+SRC := $(call rwildcard,$(SRC_DIR)/,*.c)
 # Remove main.c so tests don't get duplicate mains
 LIB_SRC := $(filter-out $(SRC_DIR)/main.c,$(SRC))
 TEST_SRC := $(wildcard $(TEST_DIR)/*.c)
@@ -75,8 +76,8 @@ $(TEST_TARGET): $(LIB_OBJ) $(TEST_OBJ)
 
 # Compile App
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Compile Tests
 $(OBJ_DIR)/test_%.o: $(TEST_DIR)/%.c

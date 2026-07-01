@@ -1,19 +1,46 @@
-#include "d_array.h"
+#include "neuron.h"
+#include "render.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 int main()
 {
-    DynamicArray my_array;
-    initArray(&my_array, 5);
+    int rand_max = 10;
+
+    // Neuron starting values.
+    float base_activation = 2.0;
+    float base_decay = 0.1;
+    float base_rest = 2.0;
+    float base_fire = 6.0;
+    float base_upper = 10.0;
+    float base_lower = 0.0;
+
+    const size_t neuron_count = 100;
+    neuron neurons[neuron_count];
     
-    // Add elements..
-    // Should trigger resize!
-    for (size_t i = 0; i < 25; i++)
-        push(&my_array, i);
+    // Creation pass.
+    for (size_t i = 0; i < neuron_count; i++) {
+        neurons[i] = create_neuron(
+            base_activation,
+            base_decay,
+            base_rest,
+            base_fire,
+            base_upper,
+            base_lower
+                );
+    }
 
-    for (size_t i = 0; i < my_array.len; i++)
-        printf("element: %i\n", my_array.array[i]);
+    // Push pass with rand()
+    for (size_t i = 0; i < neuron_count; i++) {
+        float push = rand() % (rand_max + 1);
+        stimulate(&neurons[i], push);
+    }
 
-    // Free
-    freeArray(&my_array);
+    // Render neurons
+    for (size_t i = 0; i < neuron_count; i++) {
+        printf("N:%2zu ", i);
+        render_neuron(&neurons[i]);
+    }
+
     return 0;
 }
