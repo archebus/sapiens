@@ -2,7 +2,7 @@
 #define NEURON
 
 // The neuron!
-// The atomic unit of a pawns brain.
+// The atomic unit of a agent brain.
 //  activation: the level of stimulation in this neuron.
 //  decay_rate: how quickly the neuron returns to resting.
 //  resting_value: where this neuron naturally sits.

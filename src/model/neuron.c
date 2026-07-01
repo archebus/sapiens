@@ -14,7 +14,7 @@ void stimulate(neuron *n, float push) {
 }
 
 int fired(neuron *n) {
-    return n->activation > n->fire_threshold;
+    return n->activation >= n->fire_threshold;
 } 
 
 // Ticks a neurons activation towards it's

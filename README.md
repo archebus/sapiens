@@ -101,7 +101,7 @@ different clocks here. Lookup relaxation networks...
 - [x] stimulate function to add input single, clamped
 - [x] fired predicate, return 1 on threshold
 - [x] ascii render -> single character showing activation level?
-- [ ] tests: simulate, decay, fire, decay, back below thresholds.
+- [x] tests: simulate, decay, fire, decay, back below thresholds.
 
 **Milestone**: Neuron I can poke from main.. [DONE!]
 
